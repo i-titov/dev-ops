@@ -59,7 +59,7 @@ Make sure you have Docker and Docker Compose installed on your system.
 - Access container shell:
 
     ```bash
-    docker-compose exec -it php-fpm bash
+    docker compose exec -it php-fpm bash
     ```
 
 

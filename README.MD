@@ -27,7 +27,7 @@ Make sure you have Docker and Docker Compose installed on your system.
 3. Install dependencies:
 
     ```bash
-    docker compose bild
+    docker compose build
     ```
 
 5. Start the Docker containers:

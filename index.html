@@ -8,6 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-
+<button class="btn">
+    alert
+</button>
+<script>
+    document.querySelector('.btn').addEventListener('click', function (event){
+        event.preventDefault()
+        alert("Hello world!");
+    })
+</script>
 </body>
 </html>

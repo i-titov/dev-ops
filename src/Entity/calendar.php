@@ -1,3 +1,4 @@
+<?php
 // src/Entity/Calendar.php
 
 namespace App\Entity;

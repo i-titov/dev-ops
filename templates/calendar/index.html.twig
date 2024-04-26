@@ -1,0 +1,27 @@
+{# templates/calendar/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier{% endblock %}
+
+{% block body %}
+    <div id="calendar"></div>
+
+    <script src="{{ asset('assets/fullcalendar/core/main.js') }}"></script>
+    <script src="{{ asset('assets/fullcalendar/daygrid/main.js') }}"></script>
+    <link href="{{ asset('assets/fullcalendar/core/main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/fullcalendar/daygrid/main.css') }}" rel="stylesheet" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid'],
+                events: '{{ path('calendar_events') }}',
+            });
+
+            calendar.render();
+        });
+    </script>
+{% endblock %}

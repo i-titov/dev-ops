@@ -1,30 +1,72 @@
 <?php
+
+// src/Controller/CalendarController.php
+
 namespace App\Controller;
 
+use App\Entity\Calendar;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\EventDispatcher\Event;
+
+class NewCalendarEvent extends Event
+{
+    public const NAME = 'new.calendar.event';
+
+    protected $calendar;
+
+    public function __construct(Calendar $calendar)
+    {
+        $this->calendar = $calendar;
+    }
+
+    public function getCalendar(): Calendar
+    {
+        return $this->calendar;
+    }
+}
+
+// Après la création de l'événement
+$dispatcher->dispatch(new NewCalendarEvent($calendar), NewCalendarEvent::NAME);
+
 
 class CalendarController extends AbstractController
 {
     /**
-     * @Route("/calendar-events", name="calendar_events")
+     * @Route("/calendar", name="calendar_index")
      */
-    public function calendarEvents(): JsonResponse
+    public function index(): Response
     {
-        // Générez vos données d'événements ici, par exemple à partir d'une base de données
-        $events = [
-            [
-                'title' => 'Événement 1',
-                'start' => '2024-04-27',
-            ],
-            [
-                'title' => 'Événement 2',
-                'start' => '2024-04-28',
-            ],
-            // Ajoutez d'autres événements si nécessaire
-        ];
+        $calendars = $this->getDoctrine()->getRepository(Calendar::class)->findAll();
 
-        return new JsonResponse($events);
+        return $this->render('calendar/index.html.twig', [
+            'calendars' => $calendars,
+        ]);
+    }
+
+    /**
+     * @Route("/calendar/create", name="calendar_create")
+     */
+    public function create(Request $request): Response
+    {
+        
+    }
+
+    /**
+     * @Route("/calendar/{id}/edit", name="calendar_edit")
+     */
+    public function edit(Request $request, Calendar $calendar): Response
+    {
+        
+    }
+
+    /**
+     * @Route("/calendar/{id}/delete", name="calendar_delete")
+     */
+    public function delete(Request $request, Calendar $calendar): Response
+    {
+       
     }
 }

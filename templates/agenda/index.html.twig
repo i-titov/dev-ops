@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AgendaController!{% endblock %}
+
+{% block body %}
+    <form id="addEvent" >
+        {{ form(form) }}
+    </form>
+    <div id='calendar'></div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar')
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: 650,
+                events: {{ data|raw() }}
+           })
+            calendar.render()
+        })
+    </script>
+{% endblock %}

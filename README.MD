@@ -61,6 +61,25 @@ Make sure you have Docker and Docker Compose installed on your system.
     ```bash
     docker compose exec -it php-fpm bash
     ```
+  
+- Creation of database:
+
+    ```bash
+    php bin/console doctrine:database:create
+    ```  
+- Creation of migration:
+
+    ```bash
+    php bin/console make:migration
+    ```
+    ```bash
+    php bin/console doctrine:migrations:migrate
+    ```    
+- Loading Fixtures:
+
+    ```bash
+    php bin/console doctrine:fixtures:load
+    ```
 
 
 ## Contributing
